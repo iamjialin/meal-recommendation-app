@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
+    <style>
+        /* body{
+            font-family: "Sans-serif";
+            overflow: auto;
+        } */
+        h2{
+            color: #34514B;
+            text-indent: 2em;
+        }
+        *{
+            margin:  0px;
+            padding: 0px;
+        }
+        ul{
+            list-style: none;
+            text-decoration: none;
+        }
+        .navigation{
+            width: 100%;
+            height: 50px;
+            background-color:white ;
+        }
+        .basic_search{
+            text-align: center;
+            width: 300px;
+            height: 30px;
+            border-radius: 18px;
+        }
+        .menu{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            /* overflow:auto; */
+            background-color: antiquewhite;
+        }
+        .menu_select .menu_select_a{
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+        .menu_select .menu_select_a:hover{
+            background-color:aquamarine;
+            color: white;
+        }
+        .menu_select {
+            float: left;
+        }
+        .dropdown{
+            float: right;
+        }
+        .menu_select_a{
+            text-decoration: none;
+            color: antiquewhite;
+        }
+        .menu_select_a:hover{
+            color: #fff;
+        }
+        .menu_select_sign_in{
+            float: right;
+        }
+        .menu li{
+            margin-top: 10px;
+        }
+        .menu_img{
+            width: 49px;
+        }
+        .recipe_img{
+            width: 100%;
+            height: 300;
+        }
+        .head_img{
+            width: 40px;
+            height: auto;
+        }
+        .contributor{
+            display: inline-block;
+        }
+        .card-body{
+            height: 150px;
+        }
+        .container-top-rated .card-body{
+            height: 180px;
+        }
+        .rating-star{
+            float: right;
+            margin-right: 20px;
+        }
+        .star{
+            margin-top: -5px;
+            height: 20px;
+            width: 20px;
+            display: inline-block;
+        }
+        .search_box{
+            margin-top: 30px;
+            width: 700px;
+        }
+        .model_size{
+            width: 1100px;
+            margin-left:-50%;
+        }
+        body{
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;     
+            width: 100%;
+            height: 100%;
+            background-image: url("{{url_for('static',filename='dirtyimg/home_bcg.jpeg')}}");
+            background-size: cover;
+            /* opacity: 0.6; */
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        .cont{
+            position: absolute;
+            margin-top: 30px;
+            width: 1000px;
+            margin-left: 15%;
+            background:rgba(238, 241, 244, 0.8);
+            box-shadow: 7px 7px 2px 1px rgba(4, 4, 19, 0.2);
+            border-radius: 5%;
+        }
+        .home_img {
+            width: 12%;
+            margin-top: -1.7%;
+            
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="navigation">
+        <ul class="menu" style="background:rgba(238, 241, 244, 0);">
+            <!-- change href for menu here -->
+            <li class="menu_select">
+                <form action="" class="parent" method="post" >
+                    <input type="text" name="Search_by_name" class="basic_search" placeholder="Type in your recipe name">
+                    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                    <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Search more
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content model_size">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Select Your Meals</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post">
+                                <input type="text" name="Search_by_other" class="basic_search" id="search_holder" placeholder="Search what you want" value="">
+                                <button type="submit" class="btn btn-success">Search</button>
+                            </form>
+                            <button type="reset" class="btn btn-info" onclick="clear_func()">Clear All</button>
+                            <hr>
+                            <span class="badge bg-info text-dark">Meal Type</span>
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                
+                                <button type="button" onclick="btn_search(this)" style="background-color: green;" class="btn btn-success">dessert</button>
+                                <button type="button" onclick="btn_search(this)" style="background-color: green;" class="btn btn-success">veg</button>
+                                <button type="button" onclick="btn_search(this)" style="background-color: green;" class="btn btn-success">meat</button>
+                            </div>
+                            <hr>
+                            <span class="badge bg-info text-dark">Cooking Method</span>
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <button type="button" onclick="btn_search(this)" style="background-color: yellow;" class="btn btn-warning">Stir fry</button>
+                                <button type="button" onclick="btn_search(this)" style="background-color: yellow;" class="btn btn-warning">Simmer</button>
+                                <button type="button" onclick="btn_search(this)" style="background-color: yellow;" class="btn btn-warning">Heat up</button>
+                                <button type="button" onclick="btn_search(this)" style="background-color: yellow;" class="btn btn-warning">Boil</button>
+                                <button type="button" onclick="btn_search(this)" style="background-color: yellow;" class="btn btn-warning">Roast & Bake</button>
+                            </div>
+                            <hr>
+                            <span class="badge bg-info text-dark">Ingredients</span>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">almond meal</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">almonds</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">amaranth</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">apples</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">apricots</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">avocados</button><hr>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">bananas</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">barley</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">beef</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">beef chuck</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">beef ribs</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">beef tenderloin</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">brisket</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">brown rice</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">buckwheat</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">bulgur</button><hr>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">cheese</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">cherries</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">chia seeds</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">chicken</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">chicken breasts</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">chicken legs</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">chicken thighs</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">chicken wings</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">chocolate</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">coconut</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">corn flour</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">cornish hens</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">cornmeal</button><hr>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">duck</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">fish</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">flax seeds</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">goat</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">ground beef</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">ground chicken</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">ground pork</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">ground turkey</button><hr>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">lamb</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">mangos</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">millet</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">milk</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">mushroom</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">nectarines</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">oat flour</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">oats</button><hr>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">peaches</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">peanuts</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">pears</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">pineapples</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">plums</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">pomegranates</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">pork</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">powder</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">pork ribs</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">pork shoulder</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">pork tenderloin</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">prime rib</button><hr>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">quinoa</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">sausage</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">seafood</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">shellfish</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">sirloin</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">spelt</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">steak</button><hr>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">tapioca flour</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">turkey</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">veal</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">venison</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">white rice flour</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">wild game</button>
+                                <button type="button" class="btn btn-light" style="background-color: rgb(234,234,239);"id="Button_submit" onclick="btn_search(this)">wild rice</button>
+                            
+
+                            
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </form>
+                
+            </li>
+            <img src="{{url_for('static',filename = '/dirtyimg/Home.png')}}" class="home_img"></img>
+            <div class="dropdown">
+                <a class="menu_img" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                      </svg>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="{{url_for('My_personal_news_feed')}}">My personal news feed</a ></li>
+                    <li><a class="dropdown-item" href="{{url_for('Personal_profile')}}">Personal Page</a ></li>
+                    <li><a class="dropdown-item" href="{{url_for('Weekly_recipe')}}">This week's recipes</a ></li>
+                    {%if sign_in_info['admin']==1:%}
+                    <li><a class="dropdown-item" href="http://127.0.0.1:5000/user_manage/1">User management</a ></li>
+                    <li><a class="dropdown-item" href="http://127.0.0.1:5000/recipe_manage/1">Recipe management</a ></li>
+                    {%endif%}
+                    <li><a class="dropdown-item" href="{{url_for('sign_in')}}" id="signin">{{sign_in_info['state']}}</a></li>
+                </ul>
+            </div>
+            
+        </ul>
+
+    </div>
+    
+    
+    <div class="container cont">
+    <hr id="hr_line">
+    <!-- Recommended Recipes in homepage with thumbnail and summary -->
+    <h2 id="recommended">Recommended Meals Just for You</h2>
+    
+    <div id="recommended_container" class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {%if recipe_recommended:%}
+                    {%for recipe,recipe_detail in recipe_recommended.items()%}
+                    <div class="col">
+                        <div class="card h-100 border-info mb-3" style="max-width: 18rem;">
+                            <a href="http://127.0.0.1:5000/Recipe_details/{{recipe}}">
+                                <img src="{{url_for('static', filename='Food Images/'+recipe_detail['recipe_img']+'.jpg')}}" class="recipe_img" alt="...">
+                            </a>
+                            <div class="card-body">
+                            <img class="contributor head_img" src="{{url_for('static', filename='head_img/'+recipe_detail['id']+'.png')}}" alt="">
+                            <h5 class="contributor card-title">{{recipe_detail['contributor_name']}}</h5>
+                            <hr>
+                            <div style="width:100%; height:30%">
+                                <p class="card-text">{{recipe}}</p>
+                            </div>
+                            
+                            <div class="rating-star">
+                                <span>{{recipe_detail['rating']}}</span>
+                                <img class="star" src="{{url_for('static', filename='dirtyimg/star.png')}}" alt="">
+                            </div>
+                            </div>
+                            <!-- <div class="card-footer">
+                            <small class="text-muted">{{recipe['last_update']}}</small>
+                            </div> -->
+                        </div>
+                    </div>
+                    {%endfor%}
+                {%endif%}
+            </div>
+        </div>
+    </div>
+
+    <br id="br_line">
+    <br id="br_line">
+    <hr>
+    
+    <h2>Top Rated Meals</h2>
+    <div class="album py-5 bg-light">
+        <div class="container container-top-rated">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                {%for recipe,recipe_detail in recipe_rated.items()%}
+                <div class="col">
+                    <div class="card h-100 border-info mb-3" style="max-width: 18rem;">
+                        <a href="http://127.0.0.1:5000/Recipe_details/{{recipe}}">
+                            <img src="{{url_for('static', filename='Food Images/'+recipe_detail['recipe_img']+'.jpg')}}" class="recipe_img" alt="...">
+                        </a>
+                        <div class="card-body">
+                        <img class="contributor head_img" src="{{url_for('static', filename='head_img/'+recipe_detail['id']+'.png')}}" alt="">
+                        <h5 class="contributor card-title">{{recipe_detail['contributor_name']}}</h5>
+                        <hr>
+                        <div style="width: 100%; height:30%;">
+                            <p class="card-text">{{recipe}}</p>
+                        </div>
+                        <div class="rating-star">
+                            <span>{{recipe_detail['rating']}}</span>
+                            <img class="star" src="{{url_for('static', filename='dirtyimg/star.png')}}" alt="">
+                        </div>
+                        
+                        
+                        </div>
+                        <!-- <div class="card-footer">
+                        <small class="text-muted">{{recipe['last_update']}}</small>
+                        </div> -->
+                    </div>
+                </div>
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="{{url_for('static', filename='js/homepage.js')}}"></script>
+    
+</body>
+</html>

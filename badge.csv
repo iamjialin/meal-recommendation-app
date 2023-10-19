@@ -1,0 +1,14 @@
+"	badge_name	",badge_detail,badge_img
+dessert_lv1,click like for 5 dessert,bad_dessert1
+dessert_lv2,click like for 20 dessert,bad_dessert2
+dessert_lv3,click like for 50 dessert,bad_dessert3
+meat_lv1,click like for 5 meals that contain meat,bad_meat1
+meat_lv2,click like for 20 meals that contain meat,bad_meat2
+meat_lv3,click like for 50 meals that contain meat,bad_meat3
+veg_lv1,click like for 5 meals that contain vegetables,bad_veg1
+veg_lv2,click like for 20 meals that contain vegetables,bad_veg2
+veg_lv3,click like for 50 meals that contain vegetables,bad_veg3
+upload_lv1,upload 5 meals,bad_upload1
+upload_lv2,upload 20 meals,bad_upload2
+upload_lv3,upload 50 meals,bad_upload3
+shit_meal,Receive a average rating that less than 2 in all uploaded meals,bad_shit

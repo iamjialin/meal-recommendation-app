@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/theme.min.css" integrity="sha512-hbs/7O+vqWZS49DulqH1n2lVtu63t3c3MTAn0oYMINS5aT8eIAbJGDXgLt6IxDHcWyzVTgf9XyzZ9iWyVQ7mCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        .error {
+          color: red;
+        }
+
+        body{
+            background-image:  url("{{url_for('static',filename='dirtyimg/home_bcg.jpeg')}}");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .recipe-creation-content{
+            display: flex;
+            justify-content: center;
+        }
+
+        .recipe_form{
+            margin: 70px 20px 70px 20px;
+            width: 80%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-items: center;
+        }
+
+        .module{
+            background-color: aliceblue;
+            padding: 20px 20px 20px 20px; 
+            width: 500px;
+            border-radius: 25px;
+            opacity: 0.85;
+        }
+        .menu_select {
+            float: left;
+        }
+        .home_img {
+            width: 12%;
+            margin-top: -1%;
+            height: 8%;
+        }
+        .ingredients-picker{
+            display: flex;
+            flex-direction: row;
+            gap:10px;
+        }
+        .list-buttons{
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .steps{
+            grid-area: 2 / 2 / span 2 / span 1;
+        }
+
+    </style>
+    </head>
+    <body>
+        <!-- Top Navigation Bar -->
+
+        <nav class="navbar fixed-top navbar-light bg-light" >
+            <a class="menu_select" href="{{url_for('home_page')}}">
+                <img src="{{url_for('static',filename = '/dirtyimg/Home.png')}}" class="home_img"></img>
+            </a>
+        </nav>
+
+
+        <div class="recipe-creation-content">
+            <form id="myform" class="recipe_form" method="post" enctype="multipart/form-data">
+
+                <div>
+                    <br>
+                    <h2>Recipe Name</h2>
+                    <div class="module" id="recipe-name">                
+                        <input type="text" class="form-control" id="inputRecipeName" name="recipe_name">
+                    </div>
+                </div>
+
+                <div >
+                    <br>
+                    <h2>Recipe Image</h2>
+                    <div class="module mb-3" id="recipe-image">
+                        <input class="form-control" type="file" accept=".jpg" id="formFile" name="recipe_image">
+                    </div>
+                </div>
+                <div>
+                    <br>
+                    <h2>Meal Type</h2>
+                    <div class="module mb-3" id="meal-type">
+                        <select class="form-select form-select-lg mb-3" id="select-meal-type" name="meal_type" required>
+                            <option value="">Select Meal Type</option>
+                            <option value="meat">meat</option>
+                            <option value="veg">veg</option>
+                            <option value="dessert">dessert</option>
+                          </select>
+                    </div>
+                </div>
+
+                <div class="steps">
+                    <br>
+                    <h2>Recipe Steps</h2>
+                    <div class="module" id="recipe-steps">                
+                        <textarea type="text" class="form-control" id="inputRecipeSteps" name="recipe_steps" rows="9"></textarea>
+                    </div>
+                </div>                
+                <div>
+                    <br>
+                    <h2>Cooking Method</h2>
+                    <div class="module mb-3" id="cooking-method">
+                        <select class="form-select form-select-lg mb-3" id="select-cooking-method" name="cooking_method" required>
+                            <option value="">Select Cooking Method</option>
+                            <option value="Boil">Boil</option>
+                            <option value="Stir fry">Stir fry</option>
+                            <option value="Heat up">Heat up</option>
+                            <option value="Simmer">Simmer</option>
+                            <option value="Roast & Bake">Roast & Bake</option>
+                          </select>
+                    </div>
+                </div>
+                <div>
+                    <br>
+                    <h2>Add Ingredients</h2>
+                    <div class="module" id="ingredients">
+
+                        <div class="ingredients-picker">
+                            <div>
+                                <label for="input-ingredients-amount">Amount</label>
+                                <input type="number" min="0" class="form-control" id="input-ingredients-amount">
+
+                            </div>
+                            <div>
+                                <label for="input-ingredients-unit">Unit</label>
+                                <input type="text" class="form-control" value="g" id="input-ingredients-unit" disabled>
+
+                            </div>
+                            <div>
+                                <label for="input-ingredients-name">Name</label>
+                                    <select class="form-select form-select-lg mb-3" id="input-ingredients-name" required>
+                                        <option value="">Select Ingredient</option>
+                                        <option value="almond meal">Almond Meal</option>
+                                        <option value="almonds">Almonds</option>
+                                        <option value="amaranth">Amaranth</option>
+                                        <option value="apples">Apples</option>
+                                        <option value="apricots">Avocados</option>
+                                        <option value="bananas">Bananas</option>
+                                        <option value="barley">Barley</option>
+                                        <option value="beef">Beef</option>
+                                        <option value="beef chuck">Beef Chuck</option>
+                                        <option value="beef ribs">Beef Ribs</option>
+                                        <option value="beef tenderloin">Beef Tenderloin</option>
+                                        <option value="brisket">Brisket</option>
+                                        <option value="brown rice">Brown Rice</option>
+                                        <option value="buckwheat">Buckwheat</option>
+                                        <option value="bulgur">Bulgur</option>
+                                        <option value="cheese">Cheese</option>
+                                        <option value="cherries">Cherries</option>
+                                        <option value="chia seeds">Chia Seeds</option>
+                                        <option value="chicken">Chicken</option>
+                                        <option value="chicken breasts">Chicken Breasts</option>
+                                        <option value="chicken legs">Chicken Legs</option>
+                                        <option value="chicken">Chicken</option>
+                                        <option value="chicken thighs">Chicken Thighs</option>
+                                        <option value="chicken wings">Chicken Wings</option>
+                                        <option value="chocolate">Chocolate</option>
+                                        <option value="coconut">Coconut</option>
+                                        <option value="corn flour">Corn Flour</option>
+                                        <option value="cornish hens">Cornish Hens</option>
+                                        <option value="fish">Fish</option>
+                                        <option value="goat">Goat</option>
+                                        <option value="ground beef">Ground Beef</option>
+                                        <option value="ground chicken">Ground Chicken</option>
+                                        <option value="ground pork">Ground Pork</option>
+                                        <option value="ground turkey">Ground Turkey</option>
+                                        <option value="lamb">Lamb</option>
+                                        <option value="mangos">Mangos</option>
+                                        <option value="millet">Millet</option>
+                                        <option value="mushroom">Mushroom</option>
+                                        <option value="nectarines">Nectarines</option>
+                                        <option value="oat flour">Oat Flour</option>
+                                        <option value="oats">Oats</option>
+                                        <option value="peaches">Peaches</option>
+                                        <option value="peanuts">Peanuts</option>
+                                        <option value="pears">Pears</option>
+                                        <option value="pineapples">Pineapples</option>
+                                        <option value="plums">Plums</option>
+                                        <option value="pomegranates">Pomegranates</option>
+                                        <option value="pork">Pork</option>
+                                        <option value="pork ribs">Pork Ribs</option>
+                                        <option value="pork shoulder">Pork Shoulder</option>
+                                        <option value="pork tenderloin">Pork Tenderloin</option>
+                                        <option value="prime rib">Prime Rib</option>
+                                        <option value="quinoa">Quinoa</option>
+                                        <option value="sausage">Sausage</option>
+                                        <option value="seafood">Seafood</option>
+                                        <option value="shellfish">Shellfish</option>
+                                        <option value="sirloin">Sirloin</option>
+                                        <option value="spelt">Spelt</option>
+                                        <option value="steak">Steak</option>
+                                        <option value="tapioca flour">Tapioca Flour</option>
+                                        <option value="turkey">Turkey</option>
+                                        <option value="veal">Veal</option>
+                                        <option value="venison">Venison</option>
+                                        <option value="white rice flour">White Rice Flour</option>
+                                        <option value="wild game">Wild Game</option>
+                                        <option value="wild rice">Wild Rice</option>
+                                        
+                                    </select>
+
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="list-buttons">
+
+                            <div>
+                                <input type="button" class= "btn btn-outline-success" value="Add to List" id="add"/>
+                            </div>
+                            <div>
+                                <input type="button" class= "btn btn-danger" value="Clear List" id="remove"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <br>
+                    <h2>Ingredient List</h2>
+                    <div class="module">
+                        <ul class= "form-control" id="ingredient-list" >
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="navbar ms-auto fixed-bottom navbar-light bg-light" >
+        <div class="navbar-nav ms-auto flex-nowrap" style="margin-right: 60px;">
+            <button class="btn btn-lg btn-outline-secondary" type="submit" id="form-button" form="myform" >Submit</button>
+        </div>
+    </nav>
+
+    <script>
+        // add element to ingredients list
+        document.getElementById("add").onclick = function(){
+            var amount = document.getElementById("input-ingredients-amount")
+            var unit = document.getElementById("input-ingredients-unit")
+            var ingredient_name = document.getElementById("input-ingredients-name")
+            if (amount.value.length !== 0 && unit.value.length !== 0 && ingredient_name.value.length !== 0){
+                var li = document.createElement('li')
+                li.className = "list-group-item"
+                li.innerHTML = amount.value + " " + unit.value + " " +ingredient_name.value
+                document.getElementById("ingredient-list").appendChild(li)
+            }
+        }
+        // clear ingredients list
+        document.getElementById("remove").onclick = function () {
+            document.getElementById("ingredient-list").innerHTML = "";
+        }
+        if (document.getElementById("ingredient-list").innerHTML === ""){
+            alert("You must input add ingredient")
+        }
+
+
+
+        // ajax
+        $(function() {
+
+            // form validation
+            $("#myform").validate({
+                rules: {
+                    recipe_name: "required",
+                    meal_type: "required",
+                    cooking_method: "required",
+                    recipe_steps: "required"
+                }, messages: {
+                    recipe_name: "You must give this recipe a name",
+                    meal_type:"You must select a meal type",
+                    cooking_method: "You must select a cooking method",
+                    recipe_steps: "You must input recipe steps"
+                }
+            })
+
+
+            // submit form
+            $("#form-button").click(function (event) {
+                event.preventDefault();
+                if($('ul:empty').length > 0){alert('You must add ingredients to recipe')}
+                const recipe_name = document.getElementById("inputRecipeName").value;
+                const meal_type = document.getElementById("select-meal-type").value;
+                const cooking_method = document.getElementById("select-cooking-method").value;
+                var arr = [];
+                $('#ingredient-list li').each(function (){arr.push($(this).text());});
+                const recipe_steps = document.getElementById("inputRecipeSteps").value;
+
+                if (recipe_name === '' || meal_type==='' || cooking_method==='' || recipe_steps==='' || arr.toString().length === 0){
+                    alert("Please input all field")
+                }
+
+                var file_validation = $("#formFile")[0].files.length;
+                if(file_validation === 0){
+                    alert("No file selected.");
+                }
+
+
+
+                let formData = new FormData();
+                formData.append('recipe_name', recipe_name);
+                formData.append('meal_type', meal_type);
+                formData.append('cooking_method', cooking_method);
+                formData.append('ingredients', arr.toString());
+                formData.append('recipe_steps', recipe_steps);
+                formData.append('recipe_image', document.getElementById('formFile').files[0], recipe_name)
+                console.log(formData)
+
+                $.ajax({
+                        url: '/recipe_upload_page/',
+                        data: formData,
+                        contentType:false,
+                        processData:false,
+
+                        // dataType: "json",
+                        type: 'POST',
+                        success: function (response) {
+                            window.location.replace('http://127.0.0.1:5000/Personal_profile/');
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                        }
+
+                    )
+                })
+        })
+
+    </script>
+    </body>
+</html>

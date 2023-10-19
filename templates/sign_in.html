@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/theme.min.css" integrity="sha512-hbs/7O+vqWZS49DulqH1n2lVtu63t3c3MTAn0oYMINS5aT8eIAbJGDXgLt6IxDHcWyzVTgf9XyzZ9iWyVQ7mCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        .account{
+            width: 500px;
+            height: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            background-color: antiquewhite;
+            border-radius: 25px;
+            opacity: 0.85;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-light .navbar-brand {
+            color:white;
+        }
+
+        body{
+            background-image: url("{{url_for('static',filename='dirtyimg/Signin_bcg.jpeg')}}");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .form-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .but {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .account .bound{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .bound h2 {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        .create-account{
+
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+<nav class="navbar fixed-top navbar-light bg-dark" >
+    <a class="navbar-brand" href="{{url_for('home_page')}}" style="margin-left: 60px; font-size: x-large;">
+        <!-- <img src="Icon.png" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+        Leetcook
+    </a>
+</nav>
+
+<div class="account">
+
+    <div class="bound">
+        <h2>Sign In</h2>
+        <form id ="sign_in_form" method="post">
+
+            <div class="input-group mb-3" style="margin-top: 20px;">
+                <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                      </svg>
+                </span>
+                <input type="email" class= "form-control" name="email" id="email" placeholder="Your Email">
+            </div>
+            <div class="input-group mb-3" style="margin-top: 20px;">
+                <span class="input-group-text" id="basic-addon2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key" viewBox="0 0 16 16">
+                    <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                    <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                </span>
+                <input type="password" class= "form-control" name="password" id="password" placeholder="Enter Your Password">
+            </div>
+            <div class="but">
+                <button class="btn btn-lg btn-outline-secondary" id="sign_in_button" type="submit" >Sign In</button>
+            </div>
+        </form>
+
+        <div class="create-account">
+            New User?
+            <a href="{{url_for('sign_up')}}">Create Account</a>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // ajax
+    $(function() {
+        // submit form
+        $("#sign_in_button").click(function (event) {
+            event.preventDefault();
+            var email =$('#email').val()
+            var password = $('#password').val()
+            if(email==='' || password===''){
+                alert("Please enter all fields. ");
+            }
+            $.ajax({
+                    url: '/sign_in/',
+                    data: {'email':email,'password':password},
+                    // dataType: "json",
+                    type: 'POST',
+                    success: function (response) {
+                        if(response === "wrong username, please sign up first"){
+                            alert('User not registered, Now navigating to Sign up Page')
+                            window.location.replace('http://127.0.0.1:5000/sign_up/');
+                        } else if (response === "wrong password, try again later") {
+                            alert('Password incorrect')
+                            window.location.replace('http://127.0.0.1:5000/sign_in/');
+                        } else if (response === "already login"){
+                            alert('This user has logged in')
+                            window.location.replace('http://127.0.0.1:5000/sign_in/');
+                        } else {
+                            window.location.replace('http://127.0.0.1:5000/');
+                        }
+                    },
+                    error: function (error) {
+                        alert("1")
+                        console.log(error);
+                    }
+                    }
+
+                )
+            })
+    })
+</script>
+
+
+
+</body>
+</html>

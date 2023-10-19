@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}">
+    <script src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.bundle.js')}}"></script>
+    <!-- <script type="text/javascript" src="/Users/jackiev/Desktop/HTML/sign_in_process/static/js/popper.min.js"></script>
+    <link rel="stylesheet" href="/Users/jackiev/Desktop/HTML/sign_in_process/static/css/bootstrap.css">
+    <script type="text/javascript" src="/Users/jackiev/Desktop/HTML/sign_in_process/static/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Users/jackiev/Desktop/HTML/sign_in_process/static/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="/Users/jackiev/Desktop/HTML/sign_in_process/static/js/bootstrap.min.js"></script> -->
+    <style>
+        body::before{
+            font-family: "Sans-serif";
+            
+        }
+        body {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background-image: url("{{url_for('static',filename='dirtyimg/home_bcg.jpeg')}}");
+            background-size: cover;
+            /* opacity: 0.6; */
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .cont {
+            position: absolute;
+            margin-top: 30px;
+            width: 1000px;
+            margin-left: 8%;
+            background: rgba(238, 241, 244, 0.8);
+            box-shadow: 7px 7px 2px 1px rgba(4, 4, 19, 0.2);
+            border-radius: 5%;
+            /* height: auto;
+            overflow: auto; */
+        }
+        h2{
+            color: #34514B;
+            text-indent: 2em;
+        }
+        *{
+            margin:  0px;
+            padding: 0px;
+        }
+        .head_img{
+            width: 40px;
+            height: auto;
+            float: left;
+        }
+        ul{
+            list-style: none;
+            text-decoration: none;
+        }
+        .navigation{
+            width: 100%;
+            height: 50px;
+            background-color:white ;
+        }
+        .basic_search{
+            text-align: center;
+            width: 300px;
+            height: 30px;
+            border-radius: 18px;
+        }
+        .menu{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            /* overflow:auto; */
+            background-color: antiquewhite;
+        }
+        .menu_select .menu_select_a{
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+        .menu_select .menu_select_a:hover{
+            background-color:aquamarine;
+            color: white;
+        }
+        .menu_select {
+            float: left;
+        }
+        .dropdown{
+            float: right;
+        }
+        .menu_select_a{
+            text-decoration: none;
+            color: antiquewhite;
+        }
+        .menu_select_a:hover{
+            color: #fff;
+        }
+        .menu_select_sign_in{
+            float: right;
+        }
+        .menu li{
+            margin-top: 10px;
+        }
+        .menu_img{
+            width: 49px;
+        }
+        .home_img {
+            width: 12%;
+            margin-top: -1%;
+            
+        }
+        .cont{
+            position: absolute;
+            margin-top: 30px;
+            width: 1200px;
+            margin-left: 5%;
+            background:rgba(238, 241, 244, 0.8);
+            box-shadow: 7px 7px 2px 1px rgba(4, 4, 19, 0.2);
+            border-radius: 5%;
+        }
+        .achived{
+            position: relative;
+            width: 800px;
+            margin-left: 4%;
+            margin-top: 3%;
+            background-color: rgba(148, 197, 239,0);
+        }
+        .card{
+            background-color: rgb(184, 225, 240);
+        }
+        .table{
+            position: relative;
+            width: 700px;
+            margin-left: 3%;
+            margin-top: 3%;
+            
+        }
+        .tr btn{
+            width: 50px;
+            text-align: center;
+            font-size: 1px;
+            width: 100%; 
+            height: auto;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="navigation">
+        <ul class="menu">
+            <a class="menu_select" href="{{url_for('home_page')}}">
+                <img src="{{url_for('static',filename = '/dirtyimg/Home.png')}}" class="home_img"></img>
+            </a>
+            
+            <div class="dropdown">
+                <a class="menu_img" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                      </svg>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="{{url_for('My_personal_news_feed')}}">My personal news feed</a ></li>
+                    <li><a class="dropdown-item" href="{{url_for('Personal_profile')}}">Personal Page</a ></li>
+                    <li><a class="dropdown-item" href="{{url_for('Weekly_recipe')}}">This week's recipes</a ></li>
+                    <li><a class="dropdown-item" href="http://127.0.0.1:5000/user_manage/1">User management</a ></li>
+                    <li><a class="dropdown-item" href="http://127.0.0.1:5000/recipe_manage/1">Recipe management</a ></li>
+                    <li><a class="dropdown-item" href="{{url_for('sign_in')}}">{{sign_in_info['state']}}</a></li>
+                </ul>
+            </div>
+            
+        </ul>
+    </div>
+    <div class="container cont">
+        <h2>Users Management</h2>
+        <form action="" method="post">
+            <div style="margin-left: 30%;">
+                <input type="text" name="Search_by_name" class="search basic_search" placeholder="Type in user name" id="searchname">
+                    <button type="submit" class="btn btn-primary btn-sm search">Search</button>
+            </div>
+        </form>
+        <table class="table" style="margin-left: 19%;">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+            {%if name_list%}
+            {%for name_detail in name_list%}
+              <tr>
+                <th scope="row">{{name_detail['user_id']}}</th>
+                <td>{{name_detail['user_name']}}</td>
+                <td>{{name_detail['user_email']}}</td>
+                
+                <td>
+                    <a href="javascript:void(0);">
+                    <button class="btn btn-danger" value="{{name_detail['user_id']}}" onclick="del_func('/delete_user/',this)">Delete</button>
+                    </a>
+                </td>
+                
+              </tr>
+            {%endfor%}
+            {%endif%}
+            </tbody>
+          </table>
+            {%if page%}
+            <nav aria-label="Page navigation example" style="position:relative; margin-left: 40%;">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="{{page['page_prev']}}" aria-label="Previous" id="page_prev">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">{{page['page_num']}}</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="{{page['page_next']}}" aria-label="Next" id="page_next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            {%endif%}
+          
+    </div>
+    <script src="{{url_for('static', filename='js/jquery-3.6.1.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/recipe_manage.js')}}"></script>
+</body>
+</html>
